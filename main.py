@@ -1,16 +1,22 @@
-from logic.orders import create_new_order
+from shop.apple import Apple
+from shop.order import print_order, generate_order
+from shop.potato import Potato
 
 
-def run_shop():
-    print('Witaj w sklepie')
-    product_name = input('Jaki towar chcesz kupic?: ')
-    quantity = int(input('Ile sztuk chcesz kupic?: '))
+def run_example():
+    small_apple = Apple(apple_type='small', size='S', price_for_kg=5.0)
+    big_apple = Apple(apple_type='big', size='L', price_for_kg=6.5)
+    print(small_apple.apple_type, small_apple)
+    print(big_apple.apple_type, big_apple)
 
-    result = create_new_order(product_name, quantity)
-    if result is not None:
-        total_price = result['total_price']
-        print(f"laczny koszt zamowienia to: {total_price} PLN")
+    yellow_potato = Potato(potato_type='yellow', size='S', price_for_kg=1.25)
+    print(yellow_potato.potato_type, yellow_potato)
+
+    first_order = generate_order()
+    print_order(first_order)
+    second_order = generate_order()
+    print_order(second_order)
 
 
 if __name__ == '__main__':
-    run_shop()
+    run_example()
