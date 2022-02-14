@@ -4,3 +4,6 @@ class Apple:
         self.price_for_kg = price_for_kg
         self.size = size
         self.apple_type = apple_type
+
+    def calculate_sum(self, quantity):
+        return quantity * self.price_for_kg

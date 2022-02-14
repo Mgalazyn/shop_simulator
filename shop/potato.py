@@ -5,3 +5,5 @@ class Potato:
         self.size = size
         self.potato_type = potato_type
 
+    def calculate_price(self, quantity):
+        return quantity * self.price_for_kg

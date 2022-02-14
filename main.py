@@ -1,21 +1,12 @@
-from shop.apple import Apple
-from shop.order import print_order, generate_order
-from shop.potato import Potato
+from shop.order import generate_order
+from shop.order import Order
 
 
 def run_example():
-    small_apple = Apple(apple_type='small', size='S', price_for_kg=5.0)
-    big_apple = Apple(apple_type='big', size='L', price_for_kg=6.5)
-    print(small_apple.apple_type, small_apple)
-    print(big_apple.apple_type, big_apple)
-
-    yellow_potato = Potato(potato_type='yellow', size='S', price_for_kg=1.25)
-    print(yellow_potato.potato_type, yellow_potato)
-
     first_order = generate_order()
-    print_order(first_order)
+    first_order.print_self()
     second_order = generate_order()
-    print_order(second_order)
+    second_order.print_self()
 
 
 if __name__ == '__main__':
