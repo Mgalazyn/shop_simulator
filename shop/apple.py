@@ -7,3 +7,6 @@ class Apple:
 
     def calculate_sum(self, quantity):
         return quantity * self.price_for_kg
+
+    def __repr__(self):
+        return f"<apple apple_type='{self.apple_type}', size={self.size}', price_for_kg={self.price_for_kg}>"

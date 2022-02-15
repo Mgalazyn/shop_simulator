@@ -7,3 +7,6 @@ class Potato:
 
     def calculate_price(self, quantity):
         return quantity * self.price_for_kg
+
+    def __repr__(self):
+        return f"<potato_type={self.potato_type}, size={self.size}, price_for_kg={self.price_for_kg}>"

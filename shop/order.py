@@ -10,22 +10,48 @@ class Order:
         self.first_name = first_name
         if order_elements is None:
             order_elements = []
-        self.order_elements = order_elements
-        self.total_price = self.calculate_total_price()
+        self._order_elements = order_elements
+        self.total_price = self._calculate_total_price()
 
-    def calculate_total_price(self):
+    def _calculate_total_price(self):
         total_price = 0
-        for element in self.order_elements:
+        for element in self._order_elements:
             total_price += element.calculate_element_price()
         return total_price
 
-    def print_self(self):
-        print(f"Zamowienie: {self.first_name}, {self.last_name}")
-        print(f"Zamowienie zostalo zlozone przez {self.first_name} {self.last_name}")
-        print(f"Wartosc zamowienia to: {self.total_price} PLN")
-        print(f"Zamowione produkty to: ")
-        for element in self.order_elements:
-            element.print_self()
+    def add_product_to_order(self, product, quantity):
+        new_element = OrderElement(product, quantity)
+        self._order_elements.append(new_element)
+        self.total_price = self._calculate_total_price()
+
+    def __str__(self):
+        order_details = f"Zamowienie zlozone przez: {self.first_name} {self.last_name}"
+        value_details = f"Wartosc zmaowniea to: {self.total_price} zl"
+        product_details = 'Zamowione produkty: '
+        for element in self._order_elements:
+            product_details += f"\t{element}\n"
+
+        result = "\n".join([order_details, value_details, product_details])
+        return result
+
+
+    def __eq__(self, other):
+        if self.__class__ != other.__class__:
+            return NotImplemented
+
+        if len(self._order_elements) != len(other.order_elements):
+            return False
+
+        if self.first_name != other.first_name or self.last_name != other.last_name:
+            return False
+
+        for order_element in self._order_elements:
+            if order_element not in other.order_elements:
+                return False
+        return True
+
+    def __len__(self):
+        return len(self._order_elements)
 
 
 def generate_order():
