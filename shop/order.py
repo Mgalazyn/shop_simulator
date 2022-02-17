@@ -5,7 +5,7 @@ from shop.order_element import OrderElement
 
 class Order:
 
-    MAX_ORDER_ELEMENTS = 10
+    MAX_ORDER_ELEMENTS = 5
 
     def __init__(self, first_name, last_name, order_elements=None):
         self.last_name = last_name
@@ -15,9 +15,10 @@ class Order:
         if len(order_elements) > Order.MAX_ORDER_ELEMENTS:
             order_elements = order_elements[:Order.MAX_ORDER_ELEMENTS]
         self._order_elements = order_elements
-        self.total_price = self._calculate_total_price()
 
-    def _calculate_total_price(self):
+
+    @property
+    def total_price(self):
         total_price = 0
         for element in self._order_elements:
             total_price += element.calculate_element_price()
@@ -27,9 +28,21 @@ class Order:
         if len(self._order_elements) < Order.MAX_ORDER_ELEMENTS:
             new_element = OrderElement(product, quantity)
             self._order_elements.append(new_element)
-            self.total_price = self._calculate_total_price()
         else:
             print('Osiagniete limit pozycji w zamowieniu')
+
+    @property
+    def order_elements(self):
+        return self._order_elements
+
+    @order_elements.setter
+    def order_elements(self, value):
+        if len(value) < Order.MAX_ORDER_ELEMENTS:
+            self._order_elements = value
+        else:
+            print('Za dużo elementów w zamówieniu')
+            self._order_elements = value[:Order.MAX_ORDER_ELEMENTS]
+
 
     def __str__(self):
         order_details = f"Zamowienie zlozone przez: {self.first_name} {self.last_name}"
@@ -61,7 +74,7 @@ class Order:
 
     @classmethod
     def generate_order(cls):
-        number_of_product = random.randint(1, cls.MAX_ORDER_ELEMENTS)
+        number_of_product = random.randint(5, cls.MAX_ORDER_ELEMENTS)
         order_elements = []
         for product_number in range(number_of_product):
             product_name = f"Produkt {product_number}"

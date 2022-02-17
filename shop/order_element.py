@@ -13,4 +13,4 @@ class OrderElement:
         return self.quantity == other.quantity and self.product == other.product
 
     def __str__(self):
-        return f" {self.product} x {self.quantity}"
+        return f" {self.product} x {self.quantity} = {OrderElement.calculate_element_price(self)}"
