@@ -1,20 +1,35 @@
-from shop.order import Order
-from shop.product import Product
-from shop.order_element import OrderElement
-from shop.tax_calculator import TaxCalculator
+from shop.order import ExpressOrder
 from shop.data_generator import generate_order
-from shop.expiring_product import Bestbefore
+from shop.discouts import PercentageDiscount, AbsoluteDiscount
+from shop.order import Order
 
 
 def run_example():
-    food = Bestbefore(
-        product_name='serek wiejski',
-        cat_name='jedzenie',
-        price=10,
-        production_date=2021,
-        years_left=3
+    order_elements = generate_order()
+    ten_percent_discount = PercentageDiscount(discount_percentage=10)
+    hundred_pln_discount = AbsoluteDiscount(discount_value=100)
+
+    no_discout_order = Order(
+        first_name='Marcin',
+        last_name='Galazyn',
+        order_elements=order_elements
     )
-    print(food.does_expire(2022))
+    order_with_percentage_discount = Order(
+        first_name='Kamil',
+        last_name='Zylinski',
+        order_elements=order_elements,
+        discount_policy=ten_percent_discount
+    )
+    order_with_absolute_value_discount = Order(
+        first_name='Krzysiek',
+        last_name='Kalm',
+        order_elements=order_elements,
+        discount_policy=hundred_pln_discount
+    )
+
+    print(no_discout_order)
+    print(order_with_percentage_discount)
+    print(order_with_absolute_value_discount)
 
 
 if __name__ == '__main__':
