@@ -1,35 +1,25 @@
-from shop.order import ExpressOrder
+from shop.apple import Apple
+from shop.potato import Potato
+from shop.product import Product
+from shop.expiring_product import Bestbefore
 from shop.data_generator import generate_order
-from shop.discouts import PercentageDiscount, AbsoluteDiscount
-from shop.order import Order
 
 
 def run_example():
-    order_elements = generate_order()
-    ten_percent_discount = PercentageDiscount(discount_percentage=10)
-    hundred_pln_discount = AbsoluteDiscount(discount_value=100)
+    grenn_apple = Apple(apple_type='Antonowka',size='XL', price_for_kg=3.5)
+    small_potato = Potato(potato_type='Zolty', size='XL', price_for_kg=42.3)
+    print(grenn_apple)
+    print(small_potato)
+    print(grenn_apple.apple_type)
 
-    no_discout_order = Order(
-        first_name='Marcin',
-        last_name='Galazyn',
-        order_elements=order_elements
-    )
-    order_with_percentage_discount = Order(
-        first_name='Kamil',
-        last_name='Zylinski',
-        order_elements=order_elements,
-        discount_policy=ten_percent_discount
-    )
-    order_with_absolute_value_discount = Order(
-        first_name='Krzysiek',
-        last_name='Kalm',
-        order_elements=order_elements,
-        discount_policy=hundred_pln_discount
-    )
+    something = Product(product_name='Ciastko', cat_name='Jedzenie',price=3.52, identifier=201)
+    print(something)
+    expiring = Bestbefore(product_name='Ciasto', cat_name='Jedzenie', price=30.2, identifier=201,
+                          production_date=2021, years_left=3)
+    print(expiring)
 
-    print(no_discout_order)
-    print(order_with_percentage_discount)
-    print(order_with_absolute_value_discount)
+    produkty = generate_order()
+    print(produkty)
 
 
 if __name__ == '__main__':

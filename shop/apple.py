@@ -1,12 +1,11 @@
-class Apple:
+from dataclasses import dataclass
 
-    def __init__(self, apple_type, size, price_for_kg):
-        self.price_for_kg = price_for_kg
-        self.size = size
-        self.apple_type = apple_type
+
+@dataclass
+class Apple:
+    apple_type: str
+    size: str
+    price_for_kg: float
 
     def calculate_sum(self, quantity):
         return quantity * self.price_for_kg
-
-    def __repr__(self):
-        return f"<apple apple_type='{self.apple_type}', size={self.size}', price_for_kg={self.price_for_kg}>"

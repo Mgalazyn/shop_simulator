@@ -82,7 +82,8 @@ class Order:
             product_name = f"Produkt {product_number}"
             cat_name = "Inne"
             price = random.randint(1, 50)
-            product = Product(product_name, cat_name, price)
+            identifier = random.randint(1, 100)
+            product = Product(product_name, cat_name, price, identifier)
             quantity = random.randint(1, 10)
             order_elements.append(OrderElement(product=product, quantity=quantity))
         order = Order(first_name="Marcin", last_name="Galazyn", order_elements=order_elements)

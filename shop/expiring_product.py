@@ -1,12 +1,11 @@
 from shop.product import Product
+from dataclasses import dataclass
 
 
+@dataclass()
 class Bestbefore(Product):
-
-    def __init__(self, product_name, cat_name, price, production_date, years_left):
-        super().__init__(product_name, cat_name, price)
-        self.production_date = production_date
-        self.years_left = years_left
+    production_date: int
+    years_left: int
 
     def does_expire(self, current_year):
         if (self.production_date + self.years_left) > current_year:
